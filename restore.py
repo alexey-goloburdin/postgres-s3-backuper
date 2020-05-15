@@ -6,11 +6,9 @@ and load it after clear current database state.
 """
 import os
 from pathlib import Path
-import pytz
 import socket
 
 import boto3
-from botocore.exceptions import ClientError
 import psycopg2
 from termcolor import colored
 

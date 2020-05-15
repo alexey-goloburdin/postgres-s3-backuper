@@ -9,7 +9,6 @@ import pytz
 
 from termcolor import colored
 import boto3
-from botocore.exceptions import ClientError
 
 
 DB_HOSTNAME = os.getenv("DB_HOSTNAME", "localhost")
