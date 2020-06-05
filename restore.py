@@ -14,6 +14,7 @@ from termcolor import colored
 
 
 DB_HOSTNAME = os.getenv("DB_HOSTNAME", "localhost")
+DB_PORT = os.getenv("DB_PORT", 5432)
 DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
@@ -22,7 +23,7 @@ BACKUP_KEY_PRIVATE_FILE = os.getenv("BACKUP_KEY_PRIVATE_FILE")
 DB_FILENAME = '/tmp/backup_db.sql.gz.enc'
 
 connection = psycopg2.connect(
-    f"dbname={DB_NAME} user={DB_USER} host='{DB_HOSTNAME}'")
+    f"dbname={DB_NAME} user={DB_USER} host='{DB_HOSTNAME}' port={DB_PORT}")
 cursor = connection.cursor()
 
 
@@ -114,7 +115,7 @@ def clear_database():
 def load_database():
     print(f"\U0001F4A4 Database load started")
     operation_status = os.WEXITSTATUS(os.system(
-        f"""psql -h {DB_HOSTNAME} -U {DB_USER} {DB_NAME} < /tmp/db.sql"""
+        f"""psql -h {DB_HOSTNAME} -p {DB_PORT} -U {DB_USER} {DB_NAME} < /tmp/db.sql"""
     ))
     if operation_status != 0:
         exit(f"\U00002757 Can not load database, status {operation_status}.")

@@ -12,6 +12,7 @@ import boto3
 
 
 DB_HOSTNAME = os.getenv("DB_HOSTNAME", "localhost")
+DB_PORT = os.getenv("DB_PORT", 5432)
 DB_NAME = os.getenv("DB_NAME")
 DB_USER = os.getenv("DB_USER")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
@@ -44,7 +45,7 @@ def check_key_file_exists():
 def dump_database():
     print("\U0001F4E6 Preparing database backup started")
     dump_db_operation_status = os.WEXITSTATUS(os.system(
-        f"pg_dump -h {DB_HOSTNAME} -U {DB_USER} {DB_NAME} | gzip -c --best | \
+        f"pg_dump -h {DB_HOSTNAME} -p {DB_PORT} -U {DB_USER} {DB_NAME} | gzip -c --best | \
         openssl smime -encrypt -aes256 -binary -outform DEM \
         -out {DB_FILENAME} {BACKUP_KEY_PUB_FILE}"
     ))
