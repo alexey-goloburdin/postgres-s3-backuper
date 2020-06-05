@@ -31,6 +31,7 @@ note, that here we need public key file for encrypting database):
 
 ```sh
 DB_HOSTNAME=localhost \
+DB_PORT=5432 \
 DB_NAME=your_database  \
 DB_USER=your_db_user  \
 BACKUP_KEY_PUB_FILE=/home/www/.backup_key.pem.pub \
@@ -44,6 +45,7 @@ decrypting database):
 
 ```sh
 DB_HOSTNAME=localhost \
+DB_PORT=5432 \
 DB_NAME=your_database  \
 DB_USER=your_db_user  \
 BACKUP_KEY_PRIVATE_FILE=/home/www/.backup_key.pem \
